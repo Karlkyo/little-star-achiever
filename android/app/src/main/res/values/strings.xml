@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Little Star Achiever</string>
+    <string name="title_activity_main">Little Star Achiever</string>
+    <string name="package_name">com.littlestar.app</string>
+    <string name="custom_url_scheme">com.littlestar.app</string>
+</resources>
