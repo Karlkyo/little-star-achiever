@@ -2,6 +2,20 @@
   "name": "little-star-achiever",
   "private": true,
   "version": "0.0.0",
+  "description": "面向低龄儿童家庭的正向激励、星星奖励与成长记录应用",
+  "license": "MIT",
+  "author": "Karlkyo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karlkyo/little-star-achiever.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Karlkyo/little-star-achiever/issues"
+  },
+  "homepage": "https://github.com/Karlkyo/little-star-achiever#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

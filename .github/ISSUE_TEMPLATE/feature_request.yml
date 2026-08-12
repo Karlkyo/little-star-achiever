@@ -1,0 +1,26 @@
+name: 功能建议
+description: 提议一个适合儿童和家长的新功能
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的问题
+      description: 这项功能会帮助谁？目前遇到了什么困难？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 描述理想的交互和结果。
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: 儿童体验与隐私
+      description: 是否涉及儿童数据、AI 内容、通知或新的网络请求？
+    validations:
+      required: true
