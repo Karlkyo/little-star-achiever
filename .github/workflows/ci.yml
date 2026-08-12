@@ -23,5 +23,7 @@ jobs:
         run: npm ci
       - name: Type-check and build
         run: npm run check
+      - name: Check standalone demo JavaScript
+        run: node --check demo/app.js
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
