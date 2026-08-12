@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7c948" />
+    <meta name="description" content="小星星成长记独立演示版：无需账号、API Key 或安装，数据只保存在浏览器。" />
+    <title>小星星成长记 · 独立演示版</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="sun-spot sun-spot--one" aria-hidden="true"></div>
+    <div class="sun-spot sun-spot--two" aria-hidden="true"></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#tasks" aria-label="小星星成长记首页">
+          <span class="brand-mark" aria-hidden="true">★</span>
+          <span>
+            <strong>小星星成长记</strong>
+            <small>每一次努力，都值得被看见</small>
+          </span>
+        </a>
+
+        <div class="topbar-actions">
+          <span class="offline-pill" title="本演示不会发送任何数据">
+            <span class="status-dot" aria-hidden="true"></span>
+            纯本地演示
+          </span>
+          <button class="icon-button" id="resetButton" type="button" aria-label="重置演示数据" title="重置演示数据">
+            <span aria-hidden="true">↻</span>
+          </button>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="hero" aria-labelledby="greeting">
+          <div class="hero-copy">
+            <span class="eyebrow">今天也在闪闪发光</span>
+            <h1 id="greeting">你好，<span id="childName">小小探险家</span>！</h1>
+            <p>选一个刚完成的小任务，把努力装进星星罐吧。</p>
+
+            <div class="hero-actions">
+              <button class="primary-button" id="focusTasksButton" type="button">
+                <span aria-hidden="true">✓</span> 开始打卡
+              </button>
+              <button class="text-button" id="editNameButton" type="button">修改昵称</button>
+            </div>
+          </div>
+
+          <div class="jar-card" aria-live="polite">
+            <div class="jar-label">
+              <span>我的星星罐</span>
+              <strong><span id="starCount">0</span> 颗</strong>
+            </div>
+            <div class="jar" role="img" id="starJar" aria-label="星星罐中有 0 颗星">
+              <div class="jar-lid"></div>
+              <div class="jar-glass">
+                <div class="jar-shine"></div>
+                <div class="stars" id="stars" aria-hidden="true"></div>
+              </div>
+              <div class="jar-tag">GOOD JOB!</div>
+            </div>
+            <div class="progress-copy">
+              <span id="progressText">再收集 2 颗就有新成就</span>
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          </div>
+        </section>
+
+        <section class="privacy-note" aria-label="演示版隐私说明">
+          <span class="privacy-icon" aria-hidden="true">⌂</span>
+          <div>
+            <strong>放心体验</strong>
+            <p>无需登录、无需 Gemini，也不会上传数据。所有记录只保存在这个浏览器中。</p>
+          </div>
+          <a href="https://github.com/Karlkyo/little-star-achiever/blob/main/SECURITY.md">了解隐私说明</a>
+        </section>
+
+        <nav class="tabs" aria-label="主要功能">
+          <button class="tab is-active" type="button" data-tab="tasks" aria-selected="true">
+            <span aria-hidden="true">✓</span> 今日任务
+          </button>
+          <button class="tab" type="button" data-tab="rewards" aria-selected="false">
+            <span aria-hidden="true">🎁</span> 星星奖励
+          </button>
+          <button class="tab" type="button" data-tab="growth" aria-selected="false">
+            <span aria-hidden="true">🏆</span> 成长足迹
+          </button>
+        </nav>
+
+        <div class="tab-panels">
+          <section class="panel is-active" id="tasksPanel" data-panel="tasks" aria-labelledby="tasksTitle">
+            <div class="section-heading">
+              <div>
+                <span class="section-kicker">TODAY'S LITTLE WINS</span>
+                <h2 id="tasksTitle">今天完成了什么？</h2>
+              </div>
+              <p><strong id="completedToday">0</strong> / <span id="taskTotal">0</span> 已完成</p>
+            </div>
+            <div class="task-grid" id="taskGrid"></div>
+          </section>
+
+          <section class="panel" id="rewardsPanel" data-panel="rewards" aria-labelledby="rewardsTitle" hidden>
+            <div class="section-heading">
+              <div>
+                <span class="section-kicker">A LITTLE TREAT</span>
+                <h2 id="rewardsTitle">把星星换成快乐</h2>
+              </div>
+              <p>当前可用 <strong id="rewardStarCount">0</strong> 颗</p>
+            </div>
+            <div class="reward-grid" id="rewardGrid"></div>
+          </section>
+
+          <section class="panel" id="growthPanel" data-panel="growth" aria-labelledby="growthTitle" hidden>
+            <div class="section-heading">
+              <div>
+                <span class="section-kicker">YOUR BRIGHT TRAIL</span>
+                <h2 id="growthTitle">每颗星都有故事</h2>
+              </div>
+              <p>累计完成 <strong id="totalCompleted">0</strong> 次</p>
+            </div>
+            <div class="stats-grid" id="statsGrid"></div>
+            <div class="achievement-sheet">
+              <div class="achievement-heading">
+                <div>
+                  <span class="section-kicker">BADGE BOOK</span>
+                  <h3>我的成就贴纸</h3>
+                </div>
+                <span id="achievementCount">0 / 0</span>
+              </div>
+              <div class="achievement-grid" id="achievementGrid"></div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <p>这是一个可独立运行的静态演示项目 · <a href="https://github.com/Karlkyo/little-star-achiever">查看源代码</a></p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-hidden="true">
+      <span class="toast-icon" id="toastIcon" aria-hidden="true">★</span>
+      <div><strong id="toastTitle">完成啦！</strong><p id="toastMessage"></p></div>
+      <button id="undoButton" class="toast-action" type="button" hidden>撤销</button>
+    </div>
+
+    <div class="modal-backdrop" id="nameModal" role="presentation" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="nameModalTitle">
+        <button class="modal-close" type="button" data-close-modal aria-label="关闭">×</button>
+        <span class="modal-sticker" aria-hidden="true">✎</span>
+        <h2 id="nameModalTitle">你希望怎么称呼？</h2>
+        <p>昵称只保存在当前浏览器中，随时可以修改。</p>
+        <form id="nameForm">
+          <label for="nameInput">宝贝昵称</label>
+          <input id="nameInput" name="name" maxlength="12" autocomplete="off" required />
+          <button class="primary-button" type="submit">保存昵称</button>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="confirmModal" role="presentation" hidden>
+      <section class="modal" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+        <span class="modal-sticker modal-sticker--coral" aria-hidden="true">?</span>
+        <h2 id="confirmTitle">确定重置吗？</h2>
+        <p id="confirmMessage">所有演示进度都会恢复为初始状态。</p>
+        <div class="modal-actions">
+          <button class="secondary-button" type="button" data-close-modal>先保留</button>
+          <button class="danger-button" id="confirmResetButton" type="button">重置数据</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
