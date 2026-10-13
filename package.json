@@ -25,7 +25,7 @@
     "check": "npm run typecheck && npm run build"
   },
   "dependencies": {
-    "@capacitor/android": "^6.2.1",
+    "@capacitor/android": "^6.2.2",
     "@capacitor/core": "^6.2.1",
     "@google/genai": "^1.35.0",
     "@fontsource/fredoka": "^5.1.0",
